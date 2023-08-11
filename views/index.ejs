@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>reCAPTCHA demo: Simple page</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  </head>
+  <body>
+    <form id="myForm" action="/verification" method="POST">
+        <div>
+            <!-- <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response"> -->
+            <input type="text" value="prince" id="name" name="name">
+            <input type="text" value="uchiha" name="clan" id="clan">
+        </div>
+        
+      <div class="g-recaptcha" data-sitekey="6LdXxJonAAAAAIQz66g1hR2i1e9xT0_QoK0CEdQa"></div>
+      <br/>
+    
+      <input type="submit" value="Submit">
+    
+    </form>
+    <script>
+        
+            // Get the reCAPTCHA response token
+            // var recaptchaResponse = document.getElementById('g-recaptcha-response').value;
+            document.getElementById('myForm').addEventListener('submit',submitfun);
+            
+            function submitfun(e){
+             e.preventDefault();
+             const name = document.querySelector('#name').value;
+             const clan = document.querySelector('#clan').value;
+             const token = document.querySelector('#g-recaptcha-response').value;
+            
+             fetch('/verification',{
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name:name,clan:clan,token:token }),
+            })
+         .then(function(response) {
+        // Handle the response from the server
+            if (response.ok) {
+          // reCAPTCHA verification passed
+              console.log('reCAPTCHA verification passed');
+                } 
+            else {
+                // reCAPTCHA verification failed
+                console.log('reCAPTCHA verification failed');
+                }
+      })
+    }
+   
+    </script>
+
+  </body>
+</html>
