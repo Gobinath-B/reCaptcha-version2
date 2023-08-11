@@ -6,6 +6,12 @@ This repository contains an example of how to integrate Google reCAPTCHA v2 with
 
 - Node.js and npm installed on your machine
 
+## Dependencies
+
+- express js
+- axios
+- ejs
+
 ## Getting Started
 
 1. Clone this repository:
